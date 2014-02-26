@@ -1,0 +1,9 @@
+---
+:orm: sequel
+:test: minitest
+:mock: none
+:script: jquery
+:renderer: haml
+:stylesheet: none
+:namespace: Kbase
+:migration_format: number

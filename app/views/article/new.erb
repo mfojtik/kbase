@@ -1,0 +1,16 @@
+<form action="<%=url(:article, :save, :authenticity_token => session[:csrf])%>" method="POST">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" name="article[title]" class="form-control" id="title" placeholder="An example of...">
+  </div>
+  <div class="form-group">
+    <label for="body">Description/Code/Snippet</label>
+    <textarea id="body" name="article[body]" class="form-control" rows="10"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="tags">Tags</label>
+    <input type="text" name="tags" class="form-control" id="tags">
+    <span class="help-block"><b>Note</b> Tags are delimited by ','. If text include confidential or security sensitive informations, add <em>private</em> tag.</span>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

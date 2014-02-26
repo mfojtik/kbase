@@ -1,0 +1,11 @@
+<h2><%=@article.title %></h2>
+
+<p>
+  <%=@article.body %>
+</p>
+
+<p>
+  <% @article.tags.each do |tag| %>
+    <a href="<%=url(:article, :tag, :id => tag.id)%>"><span class="label label-primary"><%=tag.name%></span></a>
+  <% end %>
+</p>
