@@ -21,8 +21,12 @@ class Article < Sequel::Model
     validates_presence :body
   end
 
+  def summarize(text)
+    "#{body[0..140].strip}..."
+  end
+
   def before_save
-    self.summary = (self.body.size > 140) ? self.body.summarize(:ratio => 25) : self.body
+    self.summary = (self.body.size > 140) ? summarize(self.body) : self.body
     self.html_body = self.to_html
     super
   end
