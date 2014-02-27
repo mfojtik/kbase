@@ -16,7 +16,7 @@ class User < Sequel::Model
   end
 
   def self.from_github(user)
-    first(:login => user.login) || create(:login => user.login, :email => user.email, :avatar_url => user.avatar_url)
+    first(:login => user.login) || create(:login => user.login, :email => user.email || 'nobody@nowhere.com', :avatar_url => user.avatar_url)
   end
 
 end
