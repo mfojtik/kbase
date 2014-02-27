@@ -1,7 +1,7 @@
 <% if current_user %> 
   <p class="pull-right">
-      <a href="<%=url(:article, :edit, :id => @article.id)%>" class="btn btn-default btn-sm" role="button">Edit</a>
     <% if @article.user == current_user %>
+      <a href="<%=url(:article, :edit, :id => @article.id)%>" class="btn btn-default btn-sm" role="button">Edit</a>
       <a href="<%=url(:article, :destroy, :id => @article.id)%>" class="btn btn-danger btn-sm" role="button">Archive</a>
     <% end %>
   </p>
