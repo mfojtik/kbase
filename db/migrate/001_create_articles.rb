@@ -6,6 +6,7 @@ Sequel.migration do
       String :title, :size => 180, :null => false
       String :summary, :size => 149
       Text :body
+      Text :html_body
       DateTime :created_at
       DateTime :updated_at
       index :user_id

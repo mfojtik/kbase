@@ -1,6 +1,6 @@
 <div class="list-group">
   <% @articles.each do |article| %>
-    <a href="<%=url(:article, :show, :id => article.id)%>" class="list-group-item">
+    <a href="/<%=article.to_permalink%>" class="list-group-item">
       <h4 class="list-group-item-heading"><%=article.title%></h4>
       <p class="list-group-item-text"><%=article.summary%></p>
     </a>
