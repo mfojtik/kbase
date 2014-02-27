@@ -5,6 +5,8 @@ class Tag < Sequel::Model
 
   one_to_many :article_tags, :class => 'ArticleTags'
 
+  plugin :timestamps, :create=>:created_at, :update=>:updated_at, :update_on_create=>true
+
   plugin :association_dependencies
   add_association_dependencies :article_tags => :destroy
 

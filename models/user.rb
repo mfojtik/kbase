@@ -2,6 +2,8 @@ class User < Sequel::Model
 
   one_to_many :articles
 
+  plugin :timestamps, :create=>:created_at, :update=>:updated_at, :update_on_create=>true
+
   plugin :association_dependencies
   add_association_dependencies :articles => :destroy
 

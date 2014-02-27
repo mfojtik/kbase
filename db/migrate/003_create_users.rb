@@ -5,7 +5,8 @@ Sequel.migration do
       String :login, :null => false, :size => 150
       String :email, :null => false, :size => 150
       String :avatar_url, :size => 220
-
+      DateTime :created_at
+      DateTime :updated_at
       index :login, :unique => true
     end
   end

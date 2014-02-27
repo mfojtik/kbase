@@ -18,6 +18,8 @@ gem 'haml'
 gem 'sequel'
 gem 'faraday'
 gem 'json'
+gem 'summarize'
+gem 'github-markdown'
 
 group :development do
   # Test requirements

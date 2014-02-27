@@ -1,11 +1,13 @@
 <h2><%=@article.title %></h2>
 
-<p>
-  <%=@article.body %>
-</p>
+<div class="content">
+  <%=@article.to_html %>
+</div>
 
-<p>
+<ol class="breadcrumb pull-right">
+  <li><b>@<%=@article.user.login%></b> <small><%=time_ago_in_words(@article.updated_at)%> ago</small></li>
   <% @article.tags.each do |tag| %>
-    <a href="<%=url(:article, :tag, :id => tag.id)%>"><span class="label label-primary"><%=tag.name%></span></a>
+    <li><a href="<%=url(:article, :tag, :id => tag.id)%>"><span class="label label-primary"><%=tag.name%></span></a></li>
   <% end %>
-</p>
+</ol>
+

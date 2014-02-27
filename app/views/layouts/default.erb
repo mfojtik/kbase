@@ -43,7 +43,7 @@
               </li>
               <% if current_user %>
                 <li><%=link_to "@#{current_user.login}", "https://github.com/#{current_user.login}" %></li>
-                <li><a href="<%=url(:article, :new)%>"><b>Create Article</b></a></li>
+                <li><a href="<%=url(:article, :new)%>"><b>Write Article</b></a></li>
                 <li><%=link_to "Logout", url(:authentication, :logout) %></li>
               <% else %>
                 <li><%=link_to 'Login', Github.login_url(random_string) %></li>
