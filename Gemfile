@@ -21,6 +21,8 @@ gem 'json'
 gem 'summarize'
 gem 'github-markdown'
 
+gem 'rake-compiler', '0.8.3'
+
 group :development do
   # Test requirements
   gem 'minitest', '~>2.6.0', :require => 'minitest/autorun', :group => 'test'
