@@ -28,8 +28,8 @@ group :development do
   gem 'faker'
   # Development database
   gem 'sqlite3'
+  gem 'mysql2'
   # Development server
-  gem 'puma'
 end
 
 # Padrino Stable Gem
