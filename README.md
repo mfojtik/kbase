@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mfojtik/kbase.png?branch=master)](https://travis-ci.org/mfojtik/kbase)
+[![Build Status](https://travis-ci.org/mfojtik/kbase.png?branch=master)](https://travis-ci.org/mfojtik/kbase) [![Code Climate](https://codeclimate.com/github/mfojtik/kbase.png)](https://codeclimate.com/github/mfojtik/kbase)
 
 # A simple knowledge sharing tool
 
