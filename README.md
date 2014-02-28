@@ -1,3 +1,8 @@
+<p style="float:right;">
+[![Build
+Status](https://travis-ci.org/mfojtik/kbase.png?branch=master)](https://travis-ci.org/mfojtik/kbase)
+</p>
+
 # A simple knowledge sharing tool
 
 This can be deployed on [OpenShift](http://openshift.com) as a quickstart. You
