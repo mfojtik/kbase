@@ -1,7 +1,4 @@
-<p style="float:right;">
-[![Build
-Status](https://travis-ci.org/mfojtik/kbase.png?branch=master)](https://travis-ci.org/mfojtik/kbase)
-</p>
+[![Build Status](https://travis-ci.org/mfojtik/kbase.png?branch=master)](https://travis-ci.org/mfojtik/kbase)
 
 # A simple knowledge sharing tool
 
