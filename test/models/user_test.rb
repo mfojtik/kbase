@@ -40,6 +40,25 @@ describe "User Model" do
     Article.count(:user_id => user.id).must_equal 0
   end
 
+  it '#from_github' do
+    user = get_mock_user
+    User.from_github(user).must_equal user
+    gh_user = OpenStruct.new(:login => 'test01', :email => 'test@test.com',
+                             :avatar_url => 'a')
+    new_user = User.from_github(gh_user)
+    new_user.login.must_equal gh_user.login
+    new_user.email.must_equal gh_user.email
+    new_user.avatar_url.must_equal gh_user.avatar_url
+
+    gh_user_no_email = OpenStruct.new(:login => 'test02', :email => nil,
+                                      :avatar_url => 'a')
+
+    new_user = User.from_github(gh_user_no_email)
+    new_user.login.must_equal gh_user_no_email.login
+    new_user.email.must_equal 'nobody@nowhere.com'
+    new_user.avatar_url.must_equal gh_user_no_email.avatar_url
+  end
+
   after do
     remove_mock_users!
   end
