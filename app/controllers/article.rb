@@ -8,7 +8,8 @@ Kbase::App.controllers :article do
   end
 
   get :edit, :with => :id do
-    @article = current_user.articles_dataset.first(id: params['id'])
+    halt(401) unless current_user
+    @article = Article[params['id']]
     render :new
   end
 
@@ -47,6 +48,7 @@ Kbase::App.controllers :article do
   end
 
   post :save, :map => '/save' do
+    halt(401) unless current_user
     @article = Article.new(params['article'])
     if !@article.valid?
       flash[:notice] = "Unable to save article with data provided."
