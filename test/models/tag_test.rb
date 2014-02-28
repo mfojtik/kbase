@@ -15,7 +15,7 @@ describe "Tag Model" do
     @article.add_tag(tag)
     tag.articles.wont_be_empty
     tag.articles.count.must_equal 1
-    tag.articles.first.must_equal @article
+    tag.articles.first.id.must_equal @article.id
   end
 
   it 'allow removing article from tag' do

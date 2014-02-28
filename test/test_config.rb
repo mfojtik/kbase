@@ -1,6 +1,5 @@
 RACK_ENV = 'test' unless defined?(RACK_ENV)
 require File.expand_path('../../config/boot', __FILE__)
-require 'faker'
 
 def produce_random(klass, source, source_method, attr_name=:name, attrs={})
   retry_count = 0

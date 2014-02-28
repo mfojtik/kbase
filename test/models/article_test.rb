@@ -46,6 +46,46 @@ describe "Article Model" do
     article.summary.must_equal small_text
   end
 
+  it '#author' do
+    article = @user.add_article(mock_article)
+    article.author.must_equal @user
+    new_user = get_mock_user
+    article.update(:edited_by => new_user.id, :body => 'test')
+    article.author.must_equal new_user
+  end
+
+  it '#to_html' do
+    article = @user.add_article(mock_article)
+    article.update(:body => '**test**')
+    article.to_html.must_equal "<p><strong>test</strong></p>\n"
+    article.html_body.must_equal "<p><strong>test</strong></p>\n"
+  end
+
+  it '#to_permalink' do
+    article = @user.add_article(mock_article)
+    article.update(:title => 'test article')
+    article.to_permalink.must_equal "#{article.id}-test-article"
+  end
+
+  it '#tags_values' do
+    article = @user.add_article(mock_article)
+    article.add_tag(Tag.create(:name => 'mock'))
+    article.add_tag(Tag.create(:name => 'test'))
+    article.add_tag(Tag.create(:name => 'foo'))
+    article.tags_value.must_equal 'mock,test,foo'
+  end
+
+  it '#update_tags' do
+    article = @user.add_article(mock_article)
+    article.add_tag(@tags[0])
+    article.add_tag(@tags[1])
+    article.add_tag(@tags[2])
+    article.update_tags([@tags[0], @tags[3]])
+    article.tags.must_include @tags[0]
+    article.tags.must_include @tags[3]
+    article.tags.wont_include @tags[1]
+  end
+
   after do
     remove_mock_users!
     remove_tags!
