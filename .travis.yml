@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.1.0
+before_script: bundle exec rake prepare:test
+script: bundle exec rake test RACK_ENV=test
+notifications:
+  email:
+    - mi@mifo.sk
