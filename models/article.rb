@@ -44,7 +44,7 @@ class Article < Sequel::Model
   end
 
   def to_permalink
-    result = self.title
+    result = self.title.clone
     # Preserve escaped octets.
     result.gsub!(/-+/, '-')
     result.gsub!(/%([a-f0-9]{2})/i, '--\1--')
