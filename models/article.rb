@@ -25,6 +25,14 @@ class Article < Sequel::Model
     "#{body[0..140].strip}..."
   end
 
+  def author
+    if author_id = self.edited_by
+      User[author_id]
+    else
+      self.user
+    end
+  end
+
   def before_save
     self.summary = (self.body.size > 140) ? summarize(self.body) : self.body
     self.html_body = self.to_html

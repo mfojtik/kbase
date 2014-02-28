@@ -53,7 +53,8 @@ Kbase::App.controllers :article do
       render :new
     else
       if params['action'] == 'update'
-        @article = current_user.articles_dataset.first(id: params['id'])
+        @article = Article[params['id']]
+        @article.edited_by = current_user.id
         @article.update_fields(params['article'], [:title, :body])
       else
         @article = current_user.add_article(@article)

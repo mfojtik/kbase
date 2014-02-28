@@ -1,7 +1,7 @@
 <% if current_user %> 
   <p class="pull-right">
+    <a href="<%=url(:article, :edit, :id => @article.id)%>" class="btn btn-default btn-sm" role="button">Edit</a>
     <% if @article.user == current_user %>
-      <a href="<%=url(:article, :edit, :id => @article.id)%>" class="btn btn-default btn-sm" role="button">Edit</a>
       <a href="<%=url(:article, :destroy, :id => @article.id)%>" class="btn btn-danger btn-sm" role="button">Archive</a>
     <% end %>
   </p>
@@ -14,7 +14,7 @@
 </div>
 
 <ol class="breadcrumb pull-right">
-  <li><b>@<%=@article.user.login%></b> <small><%=time_ago_in_words(@article.updated_at)%> ago</small></li>
+  <li><b>@<%=@article.author.login%></b> <small><%=time_ago_in_words(@article.updated_at)%> ago</small></li>
   <% @article.tags.each do |tag| %>
     <li><a href="<%=tag_url(tag.name)%>"><span class="label label-primary"><%=tag.name%></span></a></li>
   <% end %>
