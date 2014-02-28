@@ -24,7 +24,7 @@ Kbase::App.controllers :article do
 
   get %r{/tag/([a-zA-Z0-9_]+)$} do
     if tag = Tag.where(:name => params[:captures].first).first
-      @articles = tag.articles_dataset.order(:updated_at).all
+      @articles = tag.articles_dataset.order(Sequel.desc(:updated_at)).all
       render :index
     else
       not_found

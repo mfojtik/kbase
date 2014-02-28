@@ -4,7 +4,7 @@ Kbase::App.controllers :dashboard do
   layout :default
 
   get :index, :map => '/' do
-    @articles = Article.order(:updated_at).all
+    @articles = Article.order(Sequel.desc(:updated_at)).all
     render 'article/index'
   end
 
