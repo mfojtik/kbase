@@ -2,32 +2,34 @@ Kbase::App.controllers :article do
 
   layout :default
 
+  before :new, :edit, :save, :destroy do
+    require_login!
+  end
+
   get :new, :map => '/new' do
     @article = Article.new
     render :new
   end
 
   get :edit, :with => :id do
-    halt(401) unless current_user
     @article = Article[params['id']]
+    article_must_exist!
     render :new
   end
 
-  get :show, :with => :id do
-    redirect "/#{Article[params['id']].to_permalink}"
-  end
-
-  get %r{/(\d+)\-.*} do
+  get :show, :map => %r{/(\d+)\-.*} do
     @article = Article[params[:captures].first]
-    @article ? render(:show) : pass
+    article_must_exist!
+    render :show
   end
 
-  get %r{/tag/([a-zA-Z0-9_]+)$} do
-    if tag = Tag.where(:name => params[:captures].first).first
-      @articles = tag.articles_dataset.order(Sequel.desc(:updated_at)).all
+  get :tags, :map => %r{/tag/([a-zA-Z0-9_]+)$} do
+    tag_name = params[:captures].first.strip
+    if tag = Tag.first(:name => tag_name)
+      @articles = tag.ordered_articles
       render :index
     else
-      not_found
+      error "Unknown tag <b>#{tag_name}</b>"
     end
   end
 
@@ -36,7 +38,7 @@ Kbase::App.controllers :article do
     if article
       article.destroy
       flash[:notice] = 'Article was succesfully deleted.'
-      redirect url(:dashboard, :index)
+      redirect dashboard_url
     else
       not_found
     end
@@ -48,16 +50,18 @@ Kbase::App.controllers :article do
   end
 
   post :save, :map => '/save' do
-    halt(401) unless current_user
     @article = Article.new(params['article'])
     if !@article.valid?
-      flash[:notice] = "Unable to save article with data provided."
+      article_is_invalid
       render :new
     else
-      if params['action'] == 'update'
+      if is_update?
         @article = Article[params['id']]
+        article_must_exist!
         @article.edited_by = current_user.id
-        @article.update_fields(params['article'], [:title, :body])
+        unless @article.update_fields(params['article'], [:title, :body])
+          article_is_invalid
+        end
       else
         @article = current_user.add_article(@article)
       end
@@ -65,7 +69,7 @@ Kbase::App.controllers :article do
     end
 
     flash[:notice] = "Article saved. #{article_link('Share', @article)}"
-    redirect url(:article, :show, :id => @article.id)
+    redirect article_url
   end
 
 end

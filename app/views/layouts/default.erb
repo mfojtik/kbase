@@ -32,13 +32,7 @@
       <div class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Brno Knowledge Base</a>
+            <a class="navbar-brand" href="/">KBase</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -51,23 +45,20 @@
               </ul>
               </li>
               <% if current_user %>
-                <li><%=link_to "@#{current_user.login}", "https://github.com/#{current_user.login}" %></li>
+                <li><%=link_to "@#{current_user.login}", github_profile_url %></li>
                 <li><a href="<%=url(:article, :new)%>"><b>Write Article</b></a></li>
-                <li><%=link_to "Logout", url(:authentication, :logout) %></li>
+                <li><%=link_to "Logout", logout_url %></li>
               <% else %>
-                <li><%=link_to 'Login', Github.login_url(random_string) %></li>
+                <li><%=link_to 'Login', login_url %></li>
               <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </div>
-        <% if notice = flash[:notice] %>
-          <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <%=notice%>
-          </div>
-        <% end %>
-        <%=yield%>
+      <%= flash_message_block_for :notice %>
+      <%= flash_message_block_for :error %>
+      <%= flash_message_block_for :info %>
+      <%=yield%>
     </div>
   </body>
 </html>

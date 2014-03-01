@@ -20,6 +20,8 @@ class Tag < Sequel::Model
     validates_unique :name
   end
 
-
+  def ordered_articles
+    self.articles_dataset.order(Sequel.desc(:updated_at)).all
+  end
 
 end

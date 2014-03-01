@@ -11,7 +11,8 @@ module Kbase
       class User < OpenStruct; end
 
       def self.login_url(token, scope='user:email')
-        "#{GITHUB_AUTH}/login/oauth/authorize?client_id=#{GITHUB_CLIENT_ID}&state=#{token}&scope=#{scope}"
+        "#{GITHUB_AUTH}/login/oauth/authorize?"+
+          "client_id=#{GITHUB_CLIENT_ID}&state=#{token}&scope=#{scope}"
       end
 
       def self.access_token_from_code(oauth_code)
